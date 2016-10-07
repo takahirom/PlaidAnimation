@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -54,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        imageView.setBackground(new ColorDrawable(Color.parseColor("#ff191919")));
+        imageView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff191919")));
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 imageView.setImageResource(R.drawable.image_sample);
-                imageView.setHasTransientState(true);
+                ViewCompat.setHasTransientState(imageView, true);
                 final ObservableColorMatrix cm = new ObservableColorMatrix();
                 final ObjectAnimator saturation = ObjectAnimator.ofFloat(
                         cm, ObservableColorMatrix.SATURATION, 0f, 1f);
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         imageView.clearColorFilter();
-                        imageView.setHasTransientState(false);
+                        ViewCompat.setHasTransientState(imageView, false);
                     }
                 });
                 saturation.start();
