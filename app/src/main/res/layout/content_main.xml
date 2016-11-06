@@ -13,7 +13,9 @@
     tools:context="com.github.takahirom.plaidanimation.MainActivity"
     tools:showIn="@layout/activity_main">
     <ImageView
+        android:elevation="2dp"
         android:id="@+id/image_sample"
+        android:stateListAnimator="@animator/raise"
         android:layout_width="300dp"
         android:layout_height="200dp" />
 </RelativeLayout>
