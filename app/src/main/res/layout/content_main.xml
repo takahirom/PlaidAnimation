@@ -12,10 +12,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.github.takahirom.plaidanimation.MainActivity"
     tools:showIn="@layout/activity_main">
-    <ImageView
+    <com.github.takahirom.plaidanimation.ForegroundImageView
         android:elevation="2dp"
         android:id="@+id/image_sample"
         android:stateListAnimator="@animator/raise"
         android:layout_width="300dp"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        tools:targetApi="lollipop" />
 </RelativeLayout>

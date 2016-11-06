@@ -4,29 +4,32 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
+import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.AnimationUtils;
-import android.widget.ActionMenuView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Palette.PaletteAsyncListener {
 
-    private ImageView imageView;
+    private ForegroundImageView imageView;
     private Toolbar toolbar;
 
     @Override
@@ -48,18 +51,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        imageView = (ImageView) findViewById(R.id.image_sample);
+        imageView = (ForegroundImageView) findViewById(R.id.image_sample);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-        imageView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ff191919")));
+        ViewCompat.setBackground(imageView, new ColorDrawable(Color.parseColor("#ff191919")));
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                // Saturation Animation
                 imageView.setImageResource(R.drawable.image_sample);
                 ViewCompat.setHasTransientState(imageView, true);
                 final ObservableColorMatrix cm = new ObservableColorMatrix();
@@ -86,9 +90,31 @@ public class MainActivity extends AppCompatActivity {
                 });
                 saturation.start();
 
+                // Ripple
+                final Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                Palette.from(bitmap).generate(MainActivity.this);
 
+                imageView.setBackgroundColor(Color.argb(55,255,0,0));
             }
         }, 500);
+    }
+
+    class Item {
+        String title;
+        Runnable onClick;
+
+        public Item(String title, Runnable onClick) {
+            this.title = title;
+            this.onClick = onClick;
+        }
+    }
+
+    @Override
+    public void onGenerated(Palette palette) {
+        // Ripple
+        imageView.setForeground(ViewUtils.createForeground(palette, 0.25f, 0.5f,
+                ContextCompat.getColor(this, R.color.mid_grey),
+                true));
     }
 
 
@@ -156,4 +182,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
