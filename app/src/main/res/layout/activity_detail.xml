@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.github.takahirom.plaidanimation.MainActivity">
+    <ImageView
+        android:id="@+id/shot"
+        android:transitionName="@string/transition_name_shot"
+        android:src="@drawable/image_sample"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+</android.support.design.widget.CoordinatorLayout>

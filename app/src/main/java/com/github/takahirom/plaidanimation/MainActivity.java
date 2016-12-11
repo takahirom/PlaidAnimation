@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ColorMatrixColorFilter;
@@ -20,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,12 +34,15 @@ public class MainActivity extends AppCompatActivity implements Palette.PaletteAs
 
     private ForegroundImageView imageView;
     private Toolbar toolbar;
+    private View.OnClickListener onClickListener;
+    private static final int REQUEST_ID_SHOT = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         if (savedInstanceState == null) {
             animateToolbar();
@@ -55,10 +61,13 @@ public class MainActivity extends AppCompatActivity implements Palette.PaletteAs
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                ActivityOptions options =
+                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
+                                Pair.create(v, getString(R.string.transition_name_shot)));
+                startActivityForResult(intent, REQUEST_ID_SHOT, options.toBundle());
             }
         });
-        ViewCompat.setBackground(imageView, new ColorDrawable(Color.parseColor("#ff191919")));
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -94,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements Palette.PaletteAs
                 final Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                 Palette.from(bitmap).generate(MainActivity.this);
 
-                imageView.setBackgroundColor(Color.argb(55,255,0,0));
             }
         }, 500);
     }
