@@ -1,4 +1,4 @@
-package com.github.takahirom.plaidanimation;
+package com.github.takahirom.plaidanimation.utils;
 
 import android.support.annotation.CheckResult;
 import android.support.annotation.ColorInt;

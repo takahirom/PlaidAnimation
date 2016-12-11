@@ -1,4 +1,4 @@
-package com.github.takahirom.plaidanimation;
+package com.github.takahirom.plaidanimation.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -7,10 +7,8 @@ import android.animation.ValueAnimator;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +26,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
+import com.github.takahirom.plaidanimation.ForegroundImageView;
+import com.github.takahirom.plaidanimation.ObservableColorMatrix;
+import com.github.takahirom.plaidanimation.R;
+import com.github.takahirom.plaidanimation.utils.ViewUtils;
 
 
 public class MainActivity extends AppCompatActivity implements Palette.PaletteAsyncListener {

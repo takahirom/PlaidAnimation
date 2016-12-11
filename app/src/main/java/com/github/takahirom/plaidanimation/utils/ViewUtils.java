@@ -1,4 +1,4 @@
-package com.github.takahirom.plaidanimation;
+package com.github.takahirom.plaidanimation.utils;
 
 import android.annotation.TargetApi;
 import android.content.res.ColorStateList;
@@ -6,23 +6,19 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v7.graphics.Palette;
 
-class ViewUtils {
+public class ViewUtils {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    static Drawable createForeground(Palette palette,
-                                     @FloatRange(from = 0f, to = 1f) float darkAlpha,
-                                     @FloatRange(from = 0f, to = 1f) float lightAlpha,
-                                     @ColorInt int fallbackColor,
-                                     boolean bounded) {
+    public static Drawable createForeground(Palette palette,
+                                            @FloatRange(from = 0f, to = 1f) float darkAlpha,
+                                            @FloatRange(from = 0f, to = 1f) float lightAlpha,
+                                            @ColorInt int fallbackColor,
+                                            boolean bounded) {
         int rippleColor = fallbackColor;
         if (palette != null) {
             // try the named swatches in preference order
