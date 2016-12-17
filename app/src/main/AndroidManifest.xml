@@ -20,7 +20,9 @@
         </activity>
         <activity android:name=".activities.DetailActivity"
             android:theme="@style/AppTheme.NoActionBar.Detail"
-
+            />
+        <activity android:name=".activities.LoginActivity"
+            android:theme="@style/Plaid.Translucent.Login"
             />
     </application>
 

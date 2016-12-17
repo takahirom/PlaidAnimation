@@ -2,4 +2,7 @@
     <string name="app_name">PlaidAnimation</string>
     <string name="action_settings">Settings</string>
     <string name="transition_name_shot">shot</string>
+    <string name="transition_name_login" translatable="false">login</string>
+
+    <string name="login_title">Log in to My Service</string>
 </resources>

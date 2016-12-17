@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="text_primary_dark">#de000000</color> <!-- 87% -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="mid_grey">#40808080</color>
+
+    <color name="background_light">#fafafa</color> <!-- grey 50 -->
+    <color name="grey_300">#ffe0e0e0</color>
+    <color name="scrim">#99323232</color>
+
+    <color name="ripple_dark">@color/mid_grey</color>
+    <color name="dark_icon">#99000000</color> <!-- 60% black-->
 </resources>

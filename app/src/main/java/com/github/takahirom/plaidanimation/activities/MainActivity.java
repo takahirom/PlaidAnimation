@@ -11,8 +11,6 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
@@ -25,11 +23,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.github.takahirom.plaidanimation.ForegroundImageView;
 import com.github.takahirom.plaidanimation.ObservableColorMatrix;
 import com.github.takahirom.plaidanimation.R;
+import com.github.takahirom.plaidanimation.transition.FabTransform;
 import com.github.takahirom.plaidanimation.utils.ViewUtils;
 
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements Palette.PaletteAs
     private ForegroundImageView imageView;
     private Toolbar toolbar;
     private View.OnClickListener onClickListener;
-    private static final int REQUEST_ID_SHOT = 2;
+    private static final int REQUEST_ID = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +51,18 @@ public class MainActivity extends AppCompatActivity implements Palette.PaletteAs
             animateToolbar();
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        ImageButton fab = (ImageButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent login = new Intent(MainActivity.this, LoginActivity.class);
+                FabTransform.addExtras(login,
+                        ContextCompat.getColor(MainActivity.this, R.color.colorAccent), R.drawable.ic_add_dark);
+                ActivityOptions options =
+                        ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
+                                view, getString(R.string.transition_name_login));
+                startActivityForResult(login,
+                        REQUEST_ID, options.toBundle());
             }
         });
 
@@ -68,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements Palette.PaletteAs
                 ActivityOptions options =
                         ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
                                 Pair.create(v, getString(R.string.transition_name_shot)));
-                startActivityForResult(intent, REQUEST_ID_SHOT, options.toBundle());
+                startActivityForResult(intent, REQUEST_ID, options.toBundle());
             }
         });
 
